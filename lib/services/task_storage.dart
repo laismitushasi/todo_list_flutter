@@ -9,7 +9,7 @@ class TaskStorage {
     final prefs = await SharedPreferences.getInstance();
     final jsonString = prefs.getString(_storageKey);
 
-    if(jsonString == null){
+    if (jsonString == null){
       return[];
     }
 
@@ -17,12 +17,14 @@ class TaskStorage {
 
     return decodedList.map((item) => Task.fromJson(item as Map<String, dynamic>)).toList();
   }
-    Future<void> saveTask(List<Task> tasks) async{
-      final prefs = await SharedPreferences.getInstance();
 
-      final jsonString = jsonEncode(
+  Future<void> saveTasks(List<Task> tasks) async{
+    final prefs = await SharedPreferences.getInstance();
+
+    final jsonString = jsonEncode(
       tasks.map((task) => task.toJson()).toList(),
-      );
-      await prefs.setString(_storageKey, jsonString);
-    }
- }
+    );
+
+    await prefs.setString(_storageKey, jsonString);
+  }
+}

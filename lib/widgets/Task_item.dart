@@ -1,15 +1,13 @@
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import '../models/task.dart';
 
-
 class TaskItem extends StatelessWidget {
   final Task task;
 
-
   final VoidCallback onToggle;
   final VoidCallback onDelete;
-
 
   const TaskItem({
     super.key,
@@ -17,7 +15,6 @@ class TaskItem extends StatelessWidget {
     required this.onToggle,
     required this.onDelete,
   });
-
 
   @override
   Widget build(BuildContext context) {
@@ -32,20 +29,19 @@ class TaskItem extends StatelessWidget {
           value: isCompleted,
           onChanged: (_) => onToggle(),
         ),
+
         title: Text(
           task.title,
           style: textTheme.bodyLarge?.copyWith(
-            decoration: isCompleted ? TextDecoration.lineThrough: null,
-            color: isCompleted ? colorScheme.onSurface.withValues(alpha: 0.45) :
-             colorScheme.onSurface,
+            decoration: isCompleted ? TextDecoration.lineThrough : null,
+            color: isCompleted ? colorScheme.onSurface.withValues(alpha: 0.45) : colorScheme.onSurface,
           ),
         ),
 
-        trailing: IconButton(
-          tooltip: 'Excluir tarefa',
+        trailing:  IconButton(
+          tooltip: 'Exlcuir tarefa',
           onPressed: onDelete,
-          icon: const Icon(Icons.delete_outline),
-        ),
+          icon: const Icon(Icons.delete_outline)),
       ),
     );
   }
